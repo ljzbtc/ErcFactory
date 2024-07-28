@@ -17,7 +17,7 @@ contract NewInscription is ERC20, Ownable {
 
     }
 
-    function mint() public payable onlyOwner(){
-        _mint(msg.sender, PER_MINT);
+    function mint(address _minter) public payable onlyOwner(){
+        _mint(_minter, PER_MINT);
     }
 }

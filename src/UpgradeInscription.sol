@@ -25,7 +25,7 @@ contract UpgradeInscription is Initializable, ERC20Upgradeable, OwnableUpgradeab
         PER_MINT = perMint;
     }
 
-    function mint() public onlyOwner {
-        _mint(msg.sender, PER_MINT);
+    function mint(address _minter) public onlyOwner {
+        _mint(_minter, PER_MINT);
     }
 }

@@ -38,6 +38,6 @@ contract Erc20FactoryV1 {
         require(success, "Transfer failed");
 
         NewInscription inscription = NewInscription(tokenAddr);
-        inscription.mint();
+        inscription.mint(msg.sender);
     }
 }

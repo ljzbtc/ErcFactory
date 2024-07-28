@@ -9,7 +9,7 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 interface INewInscription is IERC20 {
     function initialize(string memory symbol, uint256 totalSupply, uint256 perMint) external;
-    function mint() external;
+    function mint(address _minter) external;
     function symbol() external view returns (string memory);
 }
 
@@ -56,15 +56,11 @@ contract Erc20FactoryUpgradableV2 is Initializable, OwnableUpgradeable, UUPSUpgr
         require(msg.value == price, "Insufficient payment");
         
         INewInscription inscription = INewInscription(tokenAddr);
-        require(inscription.balanceOf(msg.sender) > 0, "Not token owner");
         
-        inscription.mint();
+        inscription.mint(msg.sender);
         
         emit InscriptionMinted(msg.sender, tokenAddr, inscription.symbol());
     }
 
-    function withdrawFunds() external onlyOwner {
-        uint256 balance = address(this).balance;
-        payable(owner()).transfer(balance);
-    }
+    
 }

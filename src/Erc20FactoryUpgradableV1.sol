@@ -1,5 +1,4 @@
 // //SPDX-License-Identifier: MIT
-// pragma solidity ^0.8.0;
 
 import "./NewInscription.sol";
 
@@ -54,7 +53,7 @@ contract Erc20FactoryUpgradableV1 is
     }
     function mintInscription(address tokenAddr) public payable {
         NewInscription inscription = NewInscription(tokenAddr);
-        inscription.mint();
+        inscription.mint(msg.sender);
         emit InscriptionMinted(msg.sender, tokenAddr, inscription.symbol());
     }
 }
